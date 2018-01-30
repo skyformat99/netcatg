@@ -11,7 +11,13 @@ int server(struct Arguments myArgs)
     
     
     // Create new TCP socket
-    ssockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (myArgs.udp) {
+        //ssockfd = socket(AF_INET, SOCK_DGRAM, 0);
+        fprintf(stderr, "Error, server mode do not support UDP yet.\n");
+        exit(EXIT_FAILURE);
+    } else {
+        ssockfd = socket(AF_INET, SOCK_STREAM, 0);
+    }
     if (ssockfd < 0)
         server_error("ERROR opening socket");
     
