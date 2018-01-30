@@ -18,9 +18,9 @@ int main(int argc, char** argv)
             case 'l': // Listen (server mode)
                 myArgs.listen = 1; 
                 break;
-            case 'p': // Port
-                myArgs.port = atoi(optarg);
-                if (myArgs.port == 0) {
+            case 'p': // Server local port (server mode)
+                myArgs.localPort = atoi(optarg);
+                if (myArgs.localPort == 0) {
                     fprintf(stderr, "Error, specified port is not valid.\n");
                     exit(EXIT_FAILURE);
                 }
@@ -36,7 +36,9 @@ int main(int argc, char** argv)
         //server(argc, argv);
     } else {                     // client mode
         if (argc-optind == 2 && atoi(argv[optind+1]) != 0) {
-            client(argv[optind], argv[optind+1]);
+            strncpy(myArgs.remoteHost, argv[optind], MAX_HOSTNAME_LENGTH); // TODO: validate str termination at max length
+            myArgs.remotePort = atoi(argv[optind+1]);
+            client(myArgs.remoteHost, myArgs.remotePort);
         } else {
             fprintf(stderr, "Error, client mode:  %s [-u] hostname port\n", argv[0]);
             exit(EXIT_FAILURE);

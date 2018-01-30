@@ -18,7 +18,7 @@
 #define COLOR_RESET   "\x1b[0m"
 
 /* Client main */
-int client(char* remoteHost, char* remotePort);
+int client(char* remoteHost, int remotePort);
 
 /* Validate host/ip parameter */
 void has_valid_hostname(struct hostent* server);

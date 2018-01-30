@@ -7,11 +7,14 @@
 #include "client.h"
 #include "server.h"
 
+#define MAX_HOSTNAME_LENGTH 255
 
 struct Arguments {
         int udp;
         int listen;
-        int port;
+        int localPort;
+        int remotePort;
+        char remoteHost[MAX_HOSTNAME_LENGTH];
 };
     
 
