@@ -11,8 +11,12 @@ int client(struct Arguments myArgs)
     server = gethostbyname(myArgs.remoteHost);
     has_valid_hostname(server);
     
-    // Create new TCP socket
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    // Create the required socket
+    if (myArgs.udp) {
+        sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+    } else {
+        sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    }
     if (sockfd < 0)
         client_error("ERROR opening socket");
     

@@ -47,7 +47,7 @@ int main(int argc, char** argv)
     if (myArgs.listen == 1) {    // server mode
         //server(argc, argv);
     } else {                     // client mode
-        if (argc-optind == 2 && atoi(argv[optind+1]) != 0) {
+        if (argc-optind >= 2 && atoi(argv[optind+1]) != 0) {
             strncpy(myArgs.remoteHost, argv[optind], MAX_HOSTNAME_LENGTH);
             myArgs.remotePort = atoi(argv[optind+1]);
             client(myArgs);
@@ -67,7 +67,7 @@ void display_help(char** argv)
     printf("Server mode:  %s [-u] -l -p port\n", argv[0]);
     printf("Options:\n");
     printf("        -h        Help\n");
-    printf("        -u        UDP -- Not implemented yet!\n");            // TODO: Implement UDP
+    printf("        -u        UDP -- Not implemented yet!\n");            // TODO: Implement UDP server side
     printf("        -s        Silent -- Not implemented yet!\n");         // TODO: Silent Mode?
     printf("        -v        Verbose -- Not implemented yet!\n");        // TODO: Verbose Mode?
     printf("        -w        Wait for server reply in client mode\n\n"); // TODO: Client wait for reply after data is send
