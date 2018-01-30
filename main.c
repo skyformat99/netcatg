@@ -15,7 +15,7 @@ int main(int argc, char** argv)
     memset(&myArgs, 0, sizeof(struct Arguments));
     memset(&myArgs.remoteHost, '\0', sizeof(char) * MAX_HOSTNAME_LENGTH);
     
-    while ((opt = getopt(argc, argv, "hulp:")) != -1) {
+    while ((opt = getopt(argc, argv, "hulp:w")) != -1) {
         switch (opt) {
             case 'h': // Help
                 display_help(argv);
@@ -33,6 +33,9 @@ int main(int argc, char** argv)
                     fprintf(stderr, "Error, specified port is not valid.\n");
                     exit(EXIT_FAILURE);
                 }
+                break;
+            case 'w':
+                // TODO: Client wait for reply after data is send
                 break;
             default:  // Error, display help cmd
                 fprintf(stderr, "%s -h for help\n", argv[0]);
@@ -64,8 +67,9 @@ void display_help(char** argv)
     printf("Server mode:  %s [-u] -l -p port\n", argv[0]);
     printf("Options:\n");
     printf("        -h        Help\n");
-    printf("        -u        UDP -- Not implemented yet!\n");       // TODO: Implement UDP
-    printf("        -s        Silent -- Not implemented yet!\n");    // TODO: Silent Mode?
-    printf("        -v        Verbose -- Not implemented yet!\n\n"); // TODO: Verbose Mode?
+    printf("        -u        UDP -- Not implemented yet!\n");            // TODO: Implement UDP
+    printf("        -s        Silent -- Not implemented yet!\n");         // TODO: Silent Mode?
+    printf("        -v        Verbose -- Not implemented yet!\n");        // TODO: Verbose Mode?
+    printf("        -w        Wait for server reply in client mode\n\n"); // TODO: Client wait for reply after data is send
 }
 
