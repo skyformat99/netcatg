@@ -6,6 +6,7 @@
 #include <unistd.h>
 
 #define MAX_HOSTNAME_LENGTH 255
+#define VERSION "0.1"
 
 struct Arguments {
         int udp;
