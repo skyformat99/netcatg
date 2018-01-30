@@ -32,12 +32,15 @@ int main(int argc, char** argv)
     }
     
     
-    if (myArgs.listen == 1) {
-        // server mode
+    if (myArgs.listen == 1) {    // server mode
         //server(argc, argv);
-    } else {
-        // client mode
-        client(argc-optind, argv+optind); // Send argc and argv, without the options part
+    } else {                     // client mode
+        if (argc-optind == 2 && atoi(argv[optind+1]) != 0) {
+            client(argv[optind], argv[optind+1]);
+        } else {
+            fprintf(stderr, "Error, client mode:  %s [-u] hostname port\n", argv[0]);
+            exit(EXIT_FAILURE);
+        }
     }
 
     return (EXIT_SUCCESS);

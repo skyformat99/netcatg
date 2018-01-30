@@ -1,7 +1,7 @@
 #include "client.h"
 
 
-int client(int argcNoOpt, char** argvNoOpt)
+int client(char* remoteHost, char* remotePort)
 {
     int sockfd;                    // Socket file descriptor
     int portno;                    // Remote server port
@@ -9,9 +9,8 @@ int client(int argcNoOpt, char** argvNoOpt)
     struct sockaddr_in serv_addr;  // Server socket info
 
     // Validate server infos
-    client_has_required_args(argcNoOpt, argvNoOpt);
-    portno = atoi(argvNoOpt[1]);
-    server = gethostbyname(argvNoOpt[0]);
+    portno = atoi(remotePort);
+    server = gethostbyname(remoteHost);
     has_valid_hostname(server);
     
     // Create new TCP socket
@@ -34,15 +33,6 @@ int client(int argcNoOpt, char** argvNoOpt)
     
     close(sockfd);
     return (EXIT_SUCCESS);
-}
-
-
-void client_has_required_args(int argcNoOpt, char** argvNoOpt)
-{
-    if (argcNoOpt != 2) {
-        fprintf(stderr, "Usage: %s hostname port\n", argvNoOpt[0]);
-        exit(EXIT_FAILURE);
-   }
 }
 
 

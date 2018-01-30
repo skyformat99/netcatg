@@ -18,10 +18,7 @@
 #define COLOR_RESET   "\x1b[0m"
 
 /* Client main */
-int client(int argcNoOpt, char** argvNoOpt);
-
-/* Validate command args */
-void client_has_required_args(int argcNoOpt, char** argvNoOpt);
+int client(char* remoteHost, char* remotePort);
 
 /* Validate host/ip parameter */
 void has_valid_hostname(struct hostent* server);
