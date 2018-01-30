@@ -4,8 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "client.h"
-#include "server.h"
 
 #define MAX_HOSTNAME_LENGTH 255
 

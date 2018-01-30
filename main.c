@@ -1,4 +1,6 @@
 #include "main.h"
+#include "client.h"
+#include "server.h"
 
 int main(int argc, char** argv)
 {
@@ -38,7 +40,7 @@ int main(int argc, char** argv)
         if (argc-optind == 2 && atoi(argv[optind+1]) != 0) {
             strncpy(myArgs.remoteHost, argv[optind], MAX_HOSTNAME_LENGTH); // TODO: validate str termination at max length
             myArgs.remotePort = atoi(argv[optind+1]);
-            client(myArgs.remoteHost, myArgs.remotePort);
+            client(myArgs);
         } else {
             fprintf(stderr, "Error, client mode:  %s [-u] hostname port\n", argv[0]);
             exit(EXIT_FAILURE);

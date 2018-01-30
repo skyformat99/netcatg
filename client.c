@@ -1,14 +1,14 @@
 #include "client.h"
 
 
-int client(char* remoteHost, int remotePort)
+int client(struct Arguments myArgs)
 {
     int sockfd;                    // Socket file descriptor
     struct hostent *server;        // Remote server host details
     struct sockaddr_in serv_addr;  // Server socket info
 
     // Validate server infos
-    server = gethostbyname(remoteHost);
+    server = gethostbyname(myArgs.remoteHost);
     has_valid_hostname(server);
     
     // Create new TCP socket
@@ -20,7 +20,7 @@ int client(char* remoteHost, int remotePort)
     memset(&serv_addr, 0, sizeof(serv_addr)); // init struct to 0
     serv_addr.sin_family = AF_INET;
     memmove(&serv_addr.sin_addr.s_addr, server->h_addr_list[0], server->h_length);
-    serv_addr.sin_port = htons(remotePort);
+    serv_addr.sin_port = htons(myArgs.remotePort);
     
     // Connect to remote server
     if (connect(sockfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0)

@@ -9,6 +9,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
+#include "main.h" // struct Arguments
 
 #define EXIT_KEYWORD  "exit\n"   // Client termination keyword
 #define BUFFER_SIZE   255        // Send/Receive buffer size
@@ -18,7 +19,7 @@
 #define COLOR_RESET   "\x1b[0m"
 
 /* Client main */
-int client(char* remoteHost, int remotePort);
+int client(struct Arguments myArgs);
 
 /* Validate host/ip parameter */
 void has_valid_hostname(struct hostent* server);
