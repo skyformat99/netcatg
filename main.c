@@ -10,8 +10,9 @@ int main(int argc, char** argv)
         switch (opt) {
             case 'h': // Help
                 display_help(argv);
+                exit(EXIT_SUCCESS);
                 break;
-            case 'u': // UDP     TODO: udp not implemented yet!
+            case 'u': // UDP
                 myArgs.udp = 1; 
                 break;
             case 'l': // Listen (server mode)
@@ -36,7 +37,7 @@ int main(int argc, char** argv)
         //server(argc, argv);
     } else {
         // client mode
-        client(argc, argv);
+        client(argc-optind, argv+optind); // Send argc and argv, without the options part
     }
 
     return (EXIT_SUCCESS);
@@ -49,7 +50,7 @@ void display_help(char** argv)
     printf("Server mode:  %s [-u] -l -p port\n", argv[0]);
     printf("Options:\n");
     printf("        -h        Help\n");
-    printf("        -u        UDP\n");
+    printf("        -u        UDP -- Not implemented yet!\n");       // TODO: Implement UDP
     printf("        -s        Silent -- Not implemented yet!\n");    // TODO: Silent Mode?
     printf("        -v        Verbose -- Not implemented yet!\n\n"); // TODO: Verbose Mode?
 }
