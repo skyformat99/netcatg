@@ -45,13 +45,6 @@ void has_valid_hostname(struct hostent* server)
 }
 
 
-void client_error(char *msg) // todo, same as server_error. Merge?
-{
-    perror(msg);
-    exit(EXIT_FAILURE);
-}
-
-
 void do_client_processing(int sockfd)
 {
     char buffer[BUFFER_SIZE]; // Send/Receive buffer
@@ -64,7 +57,7 @@ void do_client_processing(int sockfd)
         fgets(buffer, BUFFER_SIZE, stdin);
 
         // Handle program exit
-        if (strcmp(buffer, EXIT_KEYWORD) == 0)
+        if (strcmp(buffer, EXIT_KEYWORD) == 0) // TODO: is this really needed?
             break;
 
         // Send message to remote server
@@ -73,4 +66,11 @@ void do_client_processing(int sockfd)
             client_error("ERROR writing to socket");
         printf(COLOR_GREEN "[Client]> %d bytes sent" COLOR_RESET "\n", bytesCount);
     }
+}
+
+
+void client_error(char *msg)
+{
+    perror(msg);
+    exit(EXIT_FAILURE);
 }

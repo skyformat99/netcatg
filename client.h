@@ -23,11 +23,11 @@ int client(char* remoteHost, char* remotePort);
 /* Validate host/ip parameter */
 void has_valid_hostname(struct hostent* server);
 
-/* Display detailed error code */
-void client_error(char *msg);
-
 /* Core client processing */
 void do_client_processing(int sockfd);
+
+/* Display detailed error code */
+void client_error(char *msg);
 
 #endif
 
