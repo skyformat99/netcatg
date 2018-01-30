@@ -12,6 +12,7 @@ struct Arguments {
         int udp;
         int listen;
         int localPort;
+        int waitReply;
         int remotePort;
         char remoteHost[MAX_HOSTNAME_LENGTH];
 };

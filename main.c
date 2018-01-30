@@ -34,7 +34,7 @@ int main(int argc, char** argv)
                 fprintf(stdout, "netcatg version %s\n", VERSION);
                 break;
             case 'w':
-                // TODO: Client wait for reply after data is send
+                myArgs.waitReply = 1;
                 break;
             default:  // Error, display help cmd
                 fprintf(stderr, "%s -h for help\n", argv[0]);
@@ -76,6 +76,6 @@ void display_help(char** argv)
     printf("        -u        UDP\n");                                    // TODO: Implement UDP server side
     printf("        -s        Silent -- Not implemented yet!\n");         // TODO: Silent Mode?
     printf("        -v        Show version\n");
-    printf("        -w        Wait for server reply in client mode\n\n"); // TODO: Client wait for reply after data is send
+    printf("        -w        Wait for server reply after msg is sent (client mode)\n\n");
 }
 

@@ -31,7 +31,7 @@ int client(struct Arguments myArgs)
         client_error("ERROR connecting");
     
     // Run client stuff
-    do_client_processing(sockfd);
+    do_client_processing(sockfd, myArgs);
     
     close(sockfd);
     return (EXIT_SUCCESS);
@@ -47,7 +47,7 @@ void has_valid_hostname(struct hostent* server)
 }
 
 
-void do_client_processing(int sockfd)
+void do_client_processing(int sockfd, struct Arguments myArgs)
 {
     char buffer[BUFFER_SIZE]; // Send/Receive buffer
     int bytesCount;           // Socket read/write bytes counter
@@ -67,6 +67,15 @@ void do_client_processing(int sockfd)
         if (bytesCount < 0)
             client_error("ERROR writing to socket");
         printf(COLOR_GREEN "[Client]> %d bytes sent" COLOR_RESET "\n", bytesCount);
+        
+        if (myArgs.waitReply) {
+            // Listening for server reply
+            memset(&buffer, 0, sizeof(buffer));
+            bytesCount = read(sockfd, buffer, BUFFER_SIZE);
+            if (bytesCount < 0)
+                client_error("ERROR reading from socket");
+            printf(COLOR_MAGENTA "%s" COLOR_RESET, buffer);
+        }
     }
 }
 

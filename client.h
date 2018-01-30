@@ -25,7 +25,7 @@ int client(struct Arguments myArgs);
 void has_valid_hostname(struct hostent* server);
 
 /* Core client processing */
-void do_client_processing(int sockfd);
+void do_client_processing(int sockfd, struct Arguments myArgs);
 
 /* Display detailed error code */
 void client_error(char *msg);
