@@ -1,19 +1,14 @@
 #include "server.h"
 
-
-int server(int argc, char** argv)
+int server(struct Arguments myArgs)
 {
     int ssockfd;                                    // Server Listening socket
     int csockfd;                                    // Client Connection socket
-    int portno;                                     // Local server port
     struct sockaddr_in serv_addr, cli_addr;         // Server & Client socket info
     socklen_t socklen = sizeof(struct sockaddr_in); // Socket info size
     struct sigaction sa;                            // SIGCHLD management, for zombie
     pid_t pid;                                      // Child pid
     
-    // Take care of command parameters
-    server_has_required_args(argc, argv);
-    portno = atoi(argv[1]);
     
     // Create new TCP socket
     ssockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -23,7 +18,7 @@ int server(int argc, char** argv)
     // Set the internet socket address with server infos
     memset(&serv_addr, 0, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
-    serv_addr.sin_port = htons(portno);
+    serv_addr.sin_port = htons(myArgs.localPort);
     serv_addr.sin_addr.s_addr = INADDR_ANY;
     
     // Bind server socket to port
@@ -61,15 +56,6 @@ int server(int argc, char** argv)
     
     close(ssockfd);
     return (EXIT_SUCCESS);
-}
-
-
-void server_has_required_args(int argc, char** argv)
-{
-    if (argc != 2) {
-        fprintf(stderr, "Usage: %s port\n", argv[0]);
-        exit(EXIT_FAILURE);
-   }
 }
 
 

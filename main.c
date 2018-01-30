@@ -29,10 +29,6 @@ int main(int argc, char** argv)
                 break;
             case 'p': // Server local port (server mode)
                 myArgs.localPort = atoi(optarg);
-                if (myArgs.localPort == 0) {
-                    fprintf(stderr, "Error, specified port is not valid.\n");
-                    exit(EXIT_FAILURE);
-                }
                 break;
             case 'w':
                 // TODO: Client wait for reply after data is send
@@ -44,9 +40,15 @@ int main(int argc, char** argv)
     }
     
     
-    if (myArgs.listen == 1) {    // server mode
-        //server(argc, argv);
-    } else {                     // client mode
+    if (myArgs.listen == 1) {    // Server mode
+        if (myArgs.localPort != 0) {
+            server(myArgs);
+        } else {
+            fprintf(stderr, "Error, server mode: %s [-u] -l -p port\n", argv[0]);
+            exit(EXIT_FAILURE);
+        }
+        
+    } else {                     // Client mode
         if (argc-optind >= 2 && atoi(argv[optind+1]) != 0) {
             strncpy(myArgs.remoteHost, argv[optind], MAX_HOSTNAME_LENGTH);
             myArgs.remotePort = atoi(argv[optind+1]);

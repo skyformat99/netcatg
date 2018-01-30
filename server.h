@@ -11,6 +11,7 @@
 #include <sys/wait.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#include "main.h" // struct Arguments
 
 #define BUFFER_SIZE  255        // Send/Receive buffer size
 #define CLIENT_QUEUE 32         // Listen queue
@@ -20,10 +21,7 @@
 #define COLOR_RESET  "\x1b[0m"
 
 /* Server main */
-int server(int argc, char** argv);
-
-/* Validate command args */
-void server_has_required_args(int argc, char** argv);
+int server(struct Arguments myArgs);
 
 /* Display detailed error code */
 void server_error(char *msg);
