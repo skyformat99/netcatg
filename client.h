@@ -11,7 +11,6 @@
 #include <netdb.h>
 #include "main.h" // struct Arguments
 
-#define EXIT_KEYWORD  "exit\n"   // Client termination keyword
 #define BUFFER_SIZE   255        // Send/Receive buffer size
 
 #define COLOR_GREEN   "\x1b[32m" // Added some color for fun

@@ -58,10 +58,6 @@ void do_client_processing(int sockfd, struct Arguments myArgs)
         memset(&buffer, 0, sizeof(buffer));
         fgets(buffer, BUFFER_SIZE, stdin);
 
-        // Handle program exit
-        if (strcmp(buffer, EXIT_KEYWORD) == 0) // TODO: is this really needed?
-            break;
-
         // Send message to remote server
         bytesCount = write(sockfd, buffer, strlen(buffer));
         if (bytesCount < 0)
