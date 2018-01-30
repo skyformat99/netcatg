@@ -5,13 +5,15 @@
 int main(int argc, char** argv)
 {
     struct Arguments myArgs;
-    memset(&myArgs, 0, sizeof(struct Arguments));
     int opt;
     
     if (argc == 1) {
         display_help(argv);
         return(EXIT_SUCCESS);
     }
+    
+    memset(&myArgs, 0, sizeof(struct Arguments));
+    memset(&myArgs.remoteHost, '\0', sizeof(char) * MAX_HOSTNAME_LENGTH);
     
     while ((opt = getopt(argc, argv, "hulp:")) != -1) {
         switch (opt) {
@@ -43,7 +45,7 @@ int main(int argc, char** argv)
         //server(argc, argv);
     } else {                     // client mode
         if (argc-optind == 2 && atoi(argv[optind+1]) != 0) {
-            strncpy(myArgs.remoteHost, argv[optind], MAX_HOSTNAME_LENGTH); // TODO: validate str termination at max length
+            strncpy(myArgs.remoteHost, argv[optind], MAX_HOSTNAME_LENGTH);
             myArgs.remotePort = atoi(argv[optind+1]);
             client(myArgs);
         } else {
