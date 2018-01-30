@@ -8,6 +8,11 @@ int main(int argc, char** argv)
     memset(&myArgs, 0, sizeof(struct Arguments));
     int opt;
     
+    if (argc == 1) {
+        display_help(argv);
+        return(EXIT_SUCCESS);
+    }
+    
     while ((opt = getopt(argc, argv, "hulp:")) != -1) {
         switch (opt) {
             case 'h': // Help
